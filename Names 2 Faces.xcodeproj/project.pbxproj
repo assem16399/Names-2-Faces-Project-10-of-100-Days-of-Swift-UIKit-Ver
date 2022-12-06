@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F4B65BB3293E09D8007AC38B /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B65BB2293E09D8007AC38B /* Person.swift */; };
 		F4D282D72939E3AA005501E0 /* PersonCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D282D62939E3AA005501E0 /* PersonCollectionCell.swift */; };
 		F4E670682938FAC300C7D265 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E670672938FAC300C7D265 /* AppDelegate.swift */; };
 		F4E6706A2938FAC300C7D265 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E670692938FAC300C7D265 /* SceneDelegate.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F4B65BB2293E09D8007AC38B /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		F4D282D62939E3AA005501E0 /* PersonCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCollectionCell.swift; sourceTree = "<group>"; };
 		F4E670642938FAC300C7D265 /* Names 2 Faces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Names 2 Faces.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4E670672938FAC300C7D265 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				F4E670722938FAC400C7D265 /* LaunchScreen.storyboard */,
 				F4E670752938FAC400C7D265 /* Info.plist */,
 				F4D282D62939E3AA005501E0 /* PersonCollectionCell.swift */,
+				F4B65BB2293E09D8007AC38B /* Person.swift */,
 			);
 			path = "Names 2 Faces";
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4B65BB3293E09D8007AC38B /* Person.swift in Sources */,
 				F4D282D72939E3AA005501E0 /* PersonCollectionCell.swift in Sources */,
 				F4E6706C2938FAC300C7D265 /* ViewController.swift in Sources */,
 				F4E670682938FAC300C7D265 /* AppDelegate.swift in Sources */,
