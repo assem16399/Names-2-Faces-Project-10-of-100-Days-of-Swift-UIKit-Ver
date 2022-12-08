@@ -38,7 +38,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
         if let jpegData = image.jpegData(compressionQuality: 0.8) {
             try? jpegData.write(to: imagePath)
         }
-        persons.append(Person(name: "Unknow", image: imageName))
+        persons.append(Person(name: "Unknown", image: imageName))
         collectionView.reloadData()
 
         dismiss(animated: true)
