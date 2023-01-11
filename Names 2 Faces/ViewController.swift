@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UICollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     
     var persons = [Person]()
     
@@ -16,10 +16,19 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         collectionView.backgroundColor = .cyan
-    
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+        
+        let userDefaults = UserDefaults.standard
+        if let savedPersons = userDefaults.data(forKey: "persons"){
+            let decoder = JSONDecoder()
+            if let decodedPersons = try? decoder.decode([Person].self, from: savedPersons){
+                persons = decodedPersons
+            }
+            
+        }
     }
-
+    
     @objc private func addTapped() {
         let picker = UIImagePickerController()
         picker.allowsEditing = true
@@ -31,17 +40,21 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         guard let image = info[.editedImage] as? UIImage else { return }
-
+        
         let imageName = UUID().uuidString
         let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
-
+        
         if let jpegData = image.jpegData(compressionQuality: 0.8) {
             try? jpegData.write(to: imagePath)
         }
         persons.append(Person(name: "Unknown", image: imageName))
+        
+        
         collectionView.reloadData()
-
+        
         dismiss(animated: true)
+        
+        save()
     }
     
     func getDocumentsDirectory() -> URL {
@@ -87,6 +100,8 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
     func deletePerson(indexPath: IndexPath,collectionView: UICollectionView) {
         persons.remove(at: indexPath.item)
         collectionView.reloadData()
+        save()
+        
     }
     
     func addPersonName(indexPath: IndexPath,collectionView: UICollectionView) {
@@ -95,12 +110,24 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
         ac.addAction(UIAlertAction(title: "Add", style: .default, handler: {[weak self, weak ac]_ in
             guard let name = ac?.textFields?[0].text else {return}
             guard let currentCell = collectionView.cellForItem(at: indexPath) as? PersonCollectionCell else {return}
-            guard let person = self?.persons[indexPath.item] else {return}
-            person.name = name
+            guard let _ = self?.persons[indexPath.item] else {return}
+            self?.persons[indexPath.item].name = name
             currentCell.personNameLabel.text = name
+            self?.save()
         }))
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(ac, animated: true)
+    }
+    
+    func save() {
+        let encoder = JSONEncoder()
+        print(persons)
+        if let savedData = try? encoder.encode(persons) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "persons")
+            print("List Saved")
+        }
+        
     }
 }
 
